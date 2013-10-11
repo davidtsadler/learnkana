@@ -7,6 +7,10 @@ learnKanaApp.config(['$routeProvider', function ($routeProvider) {
         controller: 'MainController',
         templateUrl: 'views/main.html'
     });
+    $routeProvider.when('/settings', {
+        controller: 'SettingsController',
+        templateUrl: 'views/settings.html'
+    });
     $routeProvider.when('/game', {
         controller: 'GameController',
         templateUrl: 'views/game.html'

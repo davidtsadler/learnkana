@@ -1,12 +1,15 @@
 'use strict';
 
-learnKanaApp.factory('Game', [function () {
+learnKanaApp.factory('game', ['settings', function (settings) {
     var numRounds;
 
     return {
         begin: function() {
-            numRounds = 10;
+            numRounds = settings.numRounds;
+        },
+
+        getNumRounds: function () {
+            return numRounds;
         }
     };
 }]);
-

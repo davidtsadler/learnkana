@@ -1,0 +1,10 @@
+<h1 class="text-center">Settings</h1>
+<div class="form-group">
+  <label for="num-rounds">Number of rounds</label>
+  <select id="num-rounds" class="form-control" ng-model="settings.numRounds" ng-options="option for option in roundOptions"></select>
+</div>
+<div class="form-group">
+  <label for="show-katakana">Kana to show</label>
+  <select id="show-katakana" class="form-control" ng-model="settings.showKatakana" ng-options="option.value as option.text for option in showKatakanaOptions"></select>
+</div>
+<button type="button" class="btn btn-primary btn-block btn-lg" ng-click="done()">Done</button>

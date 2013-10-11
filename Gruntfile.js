@@ -19,7 +19,7 @@ module.exports = function(grunt) {
                 node: true,
                 strict: false,
                 globals: {
-                    'console': false,
+                    'window': false,
                     'angular': false,
                     'learnKanaApp': true
                 }
