@@ -1,3 +1,5 @@
+'use strict';
+
 learnKanaApp.factory('Game', [function () {
     var numRounds;
 
