@@ -1,6 +1,6 @@
 'use strict';
 
-learnKanaApp.controller('SettingsController', ['$scope', '$location', 'settings', function ($scope, $location, settings) {
+learnKanaApp.controller('SettingsController', ['$scope', '$location', 'settings', 'kana', function ($scope, $location, settings, kana) {
     $scope.roundOptions = [10,20,30,40,50,100];
     $scope.showKatakanaOptions = [
         {value: false, text: 'Hiragana'},
@@ -8,8 +8,9 @@ learnKanaApp.controller('SettingsController', ['$scope', '$location', 'settings'
     ];
 
     $scope.settings = settings;
+    $scope.kana = kana;
 
-    $scope.done = function() {
+    $scope.done = function () {
         $location.url('/');
     };
 }]);
