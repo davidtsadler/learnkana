@@ -33,8 +33,26 @@ module.exports = function(grunt) {
             src: 'app/css/**/*.css'
         },
         clean: {
-            localhost: ['.tmp/localhost'],
-            dist: ['dist']
+            localhost: ['.tmp'],
+            dist: ['dist', '.tmp']
+        },
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: [
+                    {expand: true, cwd: 'app/', src: '**/*.html', dest: '.tmp/htmlmin/'},
+                ]
+            }
+        },
+        cssmin: {
+            dist: {
+                files: [
+                    {expand: true, cwd: 'app/css/', src: '**/*.css', dest: '.tmp/cssmin/css/', ext: '.css'}
+                ],
+            }
         },
         copy: {
             localhost: {
@@ -44,7 +62,10 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: [
-                    {expand: true, cwd: 'app/', src: ['**'], dest: 'dist/'}
+                    {expand: true, cwd: '.tmp/htmlmin/', src: '**', dest: 'dist/'},
+                    {expand: true, cwd: '.tmp/cssmin/', src: '**', dest: 'dist/'},
+                    {expand: true, cwd: 'app/vendor/', src: ['**'], dest: 'dist/vendor/'},
+                    {expand: true, cwd: 'app/js/', src: ['**'], dest: 'dist/js/'}
                 ]
             }
         },
@@ -87,6 +108,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -102,6 +125,8 @@ module.exports = function(grunt) {
         'jshint',
         'csslint',
         'clean:dist',
+        'htmlmin',
+        'cssmin',
         'copy:dist'
     ]);
 };
