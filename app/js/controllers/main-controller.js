@@ -1,10 +1,10 @@
 'use strict';
 
 learnKanaApp.controller('MainController', ['$scope', '$location', function ($scope, $location) {
-    $scope.changeSettings = function() {
+    $scope.changeSettings = function () {
         $location.url('/settings');
     };
-    $scope.startGame = function() {
+    $scope.startGame = function () {
         $location.url('/game');
     };
 }]);

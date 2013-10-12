@@ -1,1 +1,22 @@
-Playing!!!
+<div class="game" ng-hide="game.ended">
+  <div class="question">
+    <div class="question-border">
+      <div class="question-inner">
+        <span>{{game.question}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="answers">
+    <div ng-repeat="choice in game.choices" class="answer ng-class:{'text-muted': game.wrongChoices[$index]}">
+      <div class="answer-border">
+        <div class="answer-inner" ng-click="game.choose($index)">
+          <span>{{choice}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>      
+<div class="score" ng-show="game.ended">
+  <button type="button" class="btn btn-primary btn-block btn-lg" ng-click="mainMenu()">Return to menu</button>
+  <button type="button" class="btn btn-primary btn-block btn-lg" ng-click="game.begin()">Play again!</button>
+</div>
