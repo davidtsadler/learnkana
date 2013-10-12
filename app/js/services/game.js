@@ -7,7 +7,9 @@ learnKanaApp.factory('game', ['settings', 'kana', function (settings, kana) {
         angular.forEach(kana, function (kanaGroups, key) {
             if (settings.includeKana[key]) {
                 angular.forEach(kanaGroups, function (characters) {
-                    data.push(characters);
+                    if (characters[0] !== '*') {
+                        data.push(characters);
+                    }
                 });
             }
         });
@@ -62,15 +64,19 @@ learnKanaApp.factory('game', ['settings', 'kana', function (settings, kana) {
 
         nextRound: function () {
             var roundData,
-                answer;
+                answer,
+                numQuestions;
 
             this.currentRound += 1;
 
-            // Choose first 4 kana.
-            roundData = getRoundData().slice(0,4);
+            // Choose first 4 kana as questions.
+            // But take into account it may be possible to select less than 4 kana in the settings. 
+            roundData = getRoundData();
+            numQuestions = roundData.length >= 4 ? 4 : roundData.length;
+            roundData = getRoundData().slice(0,numQuestions);
 
             // Pick at random one of the kana to be the correct answer.
-            answer = roundData[Math.floor(Math.random() * 4)];
+            answer = roundData[Math.floor(Math.random() * numQuestions)];
 
             this.question = answer[0];
             this.answer = settings.showKatakana ? answer[2] : answer[1];
