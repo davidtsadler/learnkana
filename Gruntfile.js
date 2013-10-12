@@ -54,6 +54,16 @@ module.exports = function(grunt) {
                 ],
             }
         },
+        uglify: {
+            dist: {
+                options: {
+                      mangle: false
+                },
+                files: [
+                    {expand: true, cwd: 'app/js/', src: '**/*.js', dest: '.tmp/uglify/js/', ext: '.js'}
+                ]
+            }
+        },
         copy: {
             localhost: {
                 files: [
@@ -64,8 +74,8 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, cwd: '.tmp/htmlmin/', src: '**', dest: 'dist/'},
                     {expand: true, cwd: '.tmp/cssmin/', src: '**', dest: 'dist/'},
-                    {expand: true, cwd: 'app/vendor/', src: ['**'], dest: 'dist/vendor/'},
-                    {expand: true, cwd: 'app/js/', src: ['**'], dest: 'dist/js/'}
+                    {expand: true, cwd: '.tmp/uglify/', src: '**', dest: 'dist/'},
+                    {expand: true, cwd: 'app/vendor/', src: ['**'], dest: 'dist/vendor/'}
                 ]
             }
         },
@@ -110,6 +120,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -127,6 +138,7 @@ module.exports = function(grunt) {
         'clean:dist',
         'htmlmin',
         'cssmin',
+        'uglify',
         'copy:dist'
     ]);
 };
