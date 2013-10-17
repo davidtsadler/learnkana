@@ -50,11 +50,13 @@ learnKanaApp.factory('game', ['settings', 'kana', function (settings, kana) {
         answer: null,
         choices: null,
         wrongChoices: null,
+        score: null,
 
         begin: function () {
             this.ended = false;
             this.numRounds = settings.numRounds;
             this.currentRound = 0;
+            this.score = 0;
             this.nextRound();
         },
 
@@ -81,22 +83,24 @@ learnKanaApp.factory('game', ['settings', 'kana', function (settings, kana) {
             this.question = answer[0];
             this.answer = settings.showKatakana ? answer[2] : answer[1];
             this.choices = [];
+            this.wrongChoices = [];
             angular.forEach(roundData, function (kana) {
                 this.choices.push(settings.showKatakana ? kana[2] : kana[1]);
+                this.wrongChoices.push(false);
             }, this);
-
-            this.wrongChoices = [false, false, false, false];
         },
 
         choose : function (choice) {
             if (this.answer === this.choices[choice]) {
+                this.score += 3;
                 this.choices[choice] = '✔';
                 if (this.currentRound < this.numRounds) {
                     this.nextRound();
                 } else {
                     this.end();
                 }
-            } else {
+            } else if (!this.wrongChoices[choice]) {
+                this.score -= 1;
                 this.choices[choice] = '✖';
                 this.wrongChoices[choice] = true;
             }

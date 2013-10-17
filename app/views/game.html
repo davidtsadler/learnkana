@@ -16,9 +16,17 @@
     </div>
   </div>
 </div>      
-<div class="container">
-  <div class="score" ng-show="game.ended">
-    <button type="button" class="btn btn-default btn-block btn-lg" ng-click="mainMenu()">Return to menu <span class="glyphicon glyphicon-home"></span></button>
-    <button type="button" class="btn btn-primary btn-block btn-lg" ng-click="game.begin()">Play again!</button>
+<div class="container" ng-show="game.ended">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Score</h2>
+      <p class="lead">You scored {{game.score}} out of {{3 * game.numRounds}}.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary btn-block btn-lg" ng-click="game.begin()">Play again!</button>
+      <button type="button" class="btn btn-default btn-block btn-lg" ng-click="mainMenu()">Return to menu <span class="glyphicon glyphicon-home"></span></button>
+    </div>
   </div>
 </div>
