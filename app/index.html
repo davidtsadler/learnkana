@@ -13,52 +13,54 @@
   </head>
   <body>
     <div ng-controller="AppController" ng-show="location.path() == '/'">
-      <div class="navbar navbar-default navbar-fixed-top">
+      <div class="wrap">
+        <div class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/#/">Learn Kana</a>
+            </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/#/">Home</a></li>
+                <li><a href="/#settings">Settings</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="jumbotron">
+          <div class="container">
+            <h1>Learn Kana</h1>
+            <p>Welcome to the learn kana webapp. A memory aid to help in your learning of hiragana and katakana.</p>
+            <p>Played over a number of rounds you are shown at random a romanised kana character. The aim is to choose the correct hiragana or katakana from the four answers. For each correct answer you will score 3 points but you will lose 1 point for each wrong answer.</p>
+          </div>
+        </div>
         <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/#/">Learn Kana</a>
+          <div class="row">
+            <div class="col-md-4">
+              <h2>Start</h2>
+              <p>Jump straight in and start playing.<br/><br/></p>
+              <p><a type="button" class="btn btn-primary" href="/#/game">Lets play!</a></p>
+            </div>
+            <div class="col-md-4">
+              <h2>Configure</h2>
+              <p>Choose how many rounds to play and which kana to learn.</p>
+              <p><a type="button" class="btn btn-default" href="/#/settings">Change settings</a></p>
+            </div>
+            <div class="col-md-4">
+              <h2>Credit</h2>
+              <p>This site is the personal project of <a href="http://davidtsadler.com/" target="_blank" title="Link to the site's developer.">David T. Sadler</a>. The code is available on <a href="https://github.com/davidtsadler/learnkana" target="_blank" title="Link to sites's GitHub repository">GitHub</a>.
+            </div>
           </div>
-          <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="/#/">Home</a></li>
-              <li><a href="/#settings">Settings</a></li>
-            </ul>
-          </div>
+          <hr/>
+          <footer>
+            <h6 class="text-center">Copyright &copy; 2013 by David T. Sadler. All Rights Reserved.</h6>
+          </footer>
         </div>
-      </div>
-      <div class="jumbotron">
-        <div class="container">
-          <h1>Learn Kana</h1>
-          <p>Welcome to the learn kana webapp. A memory aid to help in your learning of hiragana and katakana.</p>
-          <p>Played over a number of rounds you are shown at random a romanised kana character. The aim is to choose the correct hiragana or katakana from the four answers. For each correct answer you will score 3 points but you will lose 1 point for each wrong answer.</p>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h2>Start</h2>
-            <p>Jump straight in and start playing.<br/><br/></p>
-            <p><a type="button" class="btn btn-primary" href="/#/game">Lets play!</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Configure</h2>
-            <p>Choose how many rounds to play and which kana to learn.</p>
-            <p><a type="button" class="btn btn-default" href="/#/settings">Change settings</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Credit</h2>
-            <p>This site is the personal project of <a href="http://davidtsadler.com/" target="_blank" title="Link to the site's developer.">David T. Sadler</a>. The code is available on <a href="https://github.com/davidtsadler/learnkana" target="_blank" title="Link to sites's GitHub repository">GitHub</a>.
-          </div>
-        </div>
-        <hr/>
-        <footer>
-          <h6 class="text-center">Copyright &copy; 2013 by David T. Sadler. All Rights Reserved.</h6>
-        </footer>
       </div>
     </div>
     <ng-view></ng-view>
