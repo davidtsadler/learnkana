@@ -12,10 +12,41 @@
     <link rel="stylesheet" href="/css/app.css">
   </head>
   <body>
+    <div ng-controller="AppController" ng-show="location.path() == '/'">
+      <div class="jumbotron">
+        <div class="container">
+          <h1>Learn Kana</h1>
+          <p>Welcome to the learn kana webapp. A memory aid to help in your learning of hiragana and katakana.</p>
+          <p>Played over a number of rounds you are shown at random a romanised kana character. The aim is to choose the correct hiragana or katakana from the four answers. For each correct answer you will score 3 points but you will lose 1 point for each wrong answer.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Start</h2>
+            <p>Jump straight in and start playing.<br/><br/></p>
+            <p><button type="button" class="btn btn-primary" ng-click="startGame()">Lets play!</button></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Configure</h2>
+            <p>Choose how many rounds to play and which kana to learn.</p>
+            <p><button type="button" class="btn btn-default" ng-click="changeSettings()">Change settings</button></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Credit</h2>
+            <p>This site is the personal project of <a href="http://davidtsadler.com/" target="_blank" title="Link to the site's developer.">David T. Sadler</a>. The code is available on <a href="https://github.com/davidtsadler/learnkana" target="_blank" title="Link to sites's GitHub repository">GitHub</a>.
+          </div>
+        </div>
+        <hr/>
+        <footer>
+          <h6 class="text-center">Copyright &copy; 2013 by David T. Sadler. All Rights Reserved.</h6>
+        </footer>
+      </div>
+    </div>
     <ng-view></ng-view>
     <script src="/vendor/angularjs/1.0.8/angular.min.js"></script>
     <script src="/js/app.js"></script>
-    <script src="/js/controllers/main-controller.js"></script>
+    <script src="/js/controllers/app-controller.js"></script>
     <script src="/js/controllers/settings-controller.js"></script>
     <script src="/js/controllers/game-controller.js"></script>
     <script src="/js/services/local-storage.js"></script>

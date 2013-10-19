@@ -1,6 +1,8 @@
 'use strict';
 
-learnKanaApp.controller('MainController', ['$scope', '$location', function ($scope, $location) {
+learnKanaApp.controller('AppController', ['$scope', '$location', function ($scope, $location) {
+    $scope.location = $location;
+
     $scope.changeSettings = function () {
         $location.url('/settings');
     };

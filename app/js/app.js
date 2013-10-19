@@ -3,10 +3,6 @@
 var learnKanaApp = angular.module('learnKanaApp', []);
 
 learnKanaApp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/', {
-        controller: 'MainController',
-        templateUrl: 'views/main.html'
-    });
     $routeProvider.when('/settings', {
         controller: 'SettingsController',
         templateUrl: 'views/settings.html'
