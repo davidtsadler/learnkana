@@ -3,8 +3,13 @@
 module.exports = function(grunt) {
 
     grunt.initConfig({
+        paths: {
+            app: 'app',
+            dist: 'dist',
+            tmp: '.tmp'
+        },
         jshint: {
-            all: ['Gruntfile.js', 'app/js/**/*.js'],
+            all: ['Gruntfile.js', '<%= paths.app %>/js/**/*.js'],
             options: {
                 curly: true,
                 eqeqeq: true,
@@ -30,11 +35,11 @@ module.exports = function(grunt) {
                 'known-properties': false,
                 'box-sizing': false
             },
-            src: 'app/css/**/*.css'
+            src: '<%= paths.app %>/css/**/*.css'
         },
         clean: {
-            localhost: ['.tmp'],
-            dist: ['dist', '.tmp']
+            localhost: ['<%= paths.tmp %>'],
+            dist: ['<%= paths.dist %>', '<%= paths.tmp %>']
         },
         htmlmin: {
             dist: {
@@ -43,14 +48,14 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: [
-                    {expand: true, cwd: 'app/', src: '**/*.html', dest: '.tmp/htmlmin/'},
+                    {expand: true, cwd: '<%= paths.app %>/', src: '**/*.html', dest: '<%= paths.tmp %>/htmlmin/'},
                 ]
             }
         },
         cssmin: {
             dist: {
                 files: [
-                    {expand: true, cwd: 'app/css/', src: '**/*.css', dest: '.tmp/cssmin/css/', ext: '.css'}
+                    {expand: true, cwd: '<%= paths.app %>/css/', src: '**/*.css', dest: '<%= paths.tmp %>/cssmin/css/', ext: '.css'}
                 ],
             }
         },
@@ -60,41 +65,41 @@ module.exports = function(grunt) {
                       mangle: false
                 },
                 files: [
-                    {expand: true, cwd: 'app/js/', src: '**/*.js', dest: '.tmp/uglify/js/', ext: '.js'}
+                    {expand: true, cwd: '<%= paths.app %>/js/', src: '**/*.js', dest: '<%= paths.tmp %>/uglify/js/', ext: '.js'}
                 ]
             }
         },
         copy: {
             localhost: {
                 files: [
-                    {expand: true, cwd: 'app/', src: ['**'], dest: '.tmp/localhost/'}
+                    {expand: true, cwd: '<%= paths.app %>/', src: ['**'], dest: '<%= paths.tmp %>/localhost/'}
                 ]
             },
             dist: {
                 files: [
-                    {expand: true, cwd: '.tmp/htmlmin/', src: '**', dest: 'dist/'},
-                    {expand: true, cwd: '.tmp/cssmin/', src: '**', dest: 'dist/'},
-                    {expand: true, cwd: '.tmp/uglify/', src: '**', dest: 'dist/'},
-                    {expand: true, cwd: 'app/vendor/', src: ['**'], dest: 'dist/vendor/'},
-                    {src: 'app/robots.txt', dest: 'dist/robots.txt'}
+                    {expand: true, cwd: '<%= paths.tmp %>/htmlmin/', src: '**', dest: '<%= paths.dist %>/'},
+                    {expand: true, cwd: '<%= paths.tmp %>/cssmin/', src: '**', dest: '<%= paths.dist %>/'},
+                    {expand: true, cwd: '<%= paths.tmp %>/uglify/', src: '**', dest: '<%= paths.dist %>/'},
+                    {expand: true, cwd: '<%= paths.app %>/vendor/', src: ['**'], dest: '<%= paths.dist %>/vendor/'},
+                    {src: '<%= paths.app %>/robots.txt', dest: '<%= paths.dist %>/robots.txt'}
                 ]
             }
         },
         watch: {
             html: {
-                files: 'app/**/*.html',
+                files: '<%= paths.app %>/**/*.html',
                 tasks: 'build:localhost'
             },
             js: {
-                files: 'app/js/**/*.js',
+                files: '<%= paths.app %>/js/**/*.js',
                 tasks: 'build:localhost'
             },
             css: {
-                files: 'app/css/**/*.css',
+                files: '<%= paths.app %>/css/**/*.css',
                 tasks: 'build:localhost'
             },
             vendor: {
-                files: 'app/vendor/**/*.*',
+                files: '<%= paths.app %>/vendor/**/*.*',
                 tasks: 'build:localhost'
             }
         },
@@ -105,12 +110,12 @@ module.exports = function(grunt) {
             },
             localhost: {
                 options: {
-                    base: '.tmp/localhost'
+                    base: '<%= paths.tmp %>/localhost'
                 }
             },
             dist: {
                 options: {
-                    base: 'dist'
+                    base: '<%= paths.dist %>'
                 }
             }
         }
