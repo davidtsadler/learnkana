@@ -41,6 +41,29 @@ module.exports = function(grunt) {
             localhost: ['<%= paths.tmp %>'],
             dist: ['<%= paths.dist %>', '<%= paths.tmp %>']
         },
+        useminPrepare: {
+            html: '<%= paths.app %>/index.html',
+            options: {
+                dest: '<%= paths.dist %>'
+            }
+        },
+        rev: {
+            dist: {
+                files: {
+                    src: [
+                        '<%= paths.dist %>/js/{,*/}*.js',
+                        '<%= paths.dist %>/css/{,*/}*.css',
+                    ]
+                }
+            }
+        },
+        usemin: {
+            html: ['<%= paths.tmp %>/{,*/}*.html'],
+            css: ['<%= paths.dist %>/css/{,*/}*.css'],
+            options: {
+                dirs: ['<%= paths.dist %>']
+            }
+        },
         htmlmin: {
             dist: {
                 options: {
@@ -48,25 +71,8 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: [
-                    {expand: true, cwd: '<%= paths.app %>/', src: '**/*.html', dest: '<%= paths.tmp %>/htmlmin/'},
-                ]
-            }
-        },
-        cssmin: {
-            dist: {
-                files: [
-                    {expand: true, cwd: '<%= paths.app %>/css/', src: '**/*.css', dest: '<%= paths.tmp %>/cssmin/css/', ext: '.css'}
-                ],
-            }
-        },
-        uglify: {
-            dist: {
-                options: {
-                      mangle: false
-                },
-                files: [
-                    {expand: true, cwd: '<%= paths.app %>/js/', src: '**/*.js', dest: '<%= paths.tmp %>/uglify/js/', ext: '.js'}
-                ]
+                    {expand: true, cwd: '<%= paths.tmp %>/usemin/', src: '**/*.html', dest: '<%= paths.dist %>'},
+               ]
             }
         },
         copy: {
@@ -75,12 +81,13 @@ module.exports = function(grunt) {
                     {expand: true, cwd: '<%= paths.app %>/', src: ['**'], dest: '<%= paths.tmp %>/localhost/'}
                 ]
             },
+            usemin: {
+                files: [
+                    {expand: true, cwd: '<%= paths.app %>/', src: ['**/*.html'], dest: '<%= paths.tmp %>/usemin/'}
+                ]
+            },
             dist: {
                 files: [
-                    {expand: true, cwd: '<%= paths.tmp %>/htmlmin/', src: '**', dest: '<%= paths.dist %>/'},
-                    {expand: true, cwd: '<%= paths.tmp %>/cssmin/', src: '**', dest: '<%= paths.dist %>/'},
-                    {expand: true, cwd: '<%= paths.tmp %>/uglify/', src: '**', dest: '<%= paths.dist %>/'},
-                    {expand: true, cwd: '<%= paths.app %>/vendor/', src: ['**'], dest: '<%= paths.dist %>/vendor/'},
                     {src: '<%= paths.app %>/robots.txt', dest: '<%= paths.dist %>/robots.txt'}
                 ]
             }
@@ -124,12 +131,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-usemin');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-rev');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.registerTask('build:localhost', [
         'jshint',
@@ -142,9 +152,14 @@ module.exports = function(grunt) {
         'jshint',
         'csslint',
         'clean:dist',
-        'htmlmin',
+        'useminPrepare',
+        'concat',
+        'copy:usemin',
         'cssmin',
         'uglify',
+        'rev',
+        'usemin',
+        'htmlmin:dist',
         'copy:dist'
     ]);
 };
