@@ -1,6 +1,6 @@
 {
     "name": "learnkana",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "description": "A very simple webapp for learning the Japanese kana script hiragana.",
     "author": "David T. Sadler <davidtsadler.@googlemail.com> (http://davidtsadler.com/)",
     "license": "MIT",
