@@ -1,6 +1,6 @@
 'use strict';
 
-var learnKanaApp = angular.module('learnKanaApp', []);
+var learnKanaApp = angular.module('learnKanaApp', ['ngRoute']);
 
 learnKanaApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/settings', {
